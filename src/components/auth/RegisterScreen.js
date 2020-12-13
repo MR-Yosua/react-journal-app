@@ -61,7 +61,10 @@ export const RegisterScreen = () => {
         <Fragment>
             <h3 className="auth__title-register"> Register </h3>
 
-            <form onSubmit={handleRegister}>
+            <form 
+            onSubmit={handleRegister}
+            className = "animate__animated animate__fadeIn animate__faster"
+            >
 
 
             {

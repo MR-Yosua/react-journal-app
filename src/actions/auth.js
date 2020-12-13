@@ -2,6 +2,7 @@ import Swal from 'sweetalert2'
 import { types } from "../types/types"
 import { firebase, googleAuthProvider } from '../firebase/firebase-config';
 import { finishLoading, startLoading } from "./ui";
+import { noteLogout } from './notes';
 
 
 export const startLoginEmailPassword = (email,password) => {
@@ -11,7 +12,7 @@ export const startLoginEmailPassword = (email,password) => {
 
         firebase.auth().signInWithEmailAndPassword(email,password)
         .then(({user})=>{
-            dispatch(login(user.uid,user.displayName))
+            dispatch(login(user.uid,user.displayName));
             dispatch(finishLoading());
         }).catch(e=>{
             console.log(e);
@@ -29,11 +30,17 @@ export const startRegisterWithEmailPasswordName = (email,password,name,) => {
         .then( async ({user})=>{
             //solucion para display name en registro
             await user.updateProfile({displayName:name});
-            console.log(user);
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Your Register was successful',
+                showConfirmButton: false,
+                timer: 1500
+              });
         }).catch(e =>{
-            console.log(e);
             Swal.fire('Error',e.message,'error');
-        })
+        });
+       
     }
 }
 
@@ -49,8 +56,6 @@ export const startGoogleLogin = ()=>{
             )
         });
     }
-
-
 }
 
 
@@ -67,6 +72,7 @@ export const startLogout = () => {
     return async(dispatch)=>{
         await firebase.auth().signOut();
         dispatch(logout());
+        dispatch( noteLogout() );
     }
 }
 

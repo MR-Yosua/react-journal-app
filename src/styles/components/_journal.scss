@@ -31,7 +31,6 @@
     margin-top: 30px;
     width: 100%;
     transition: color .3s ease ;
-
     &:hover{
         color: rgb(87, 164, 194);
     }
@@ -41,7 +40,8 @@
 .journal__entries{
     flex: 1 1 auto;
     margin-top: 30px;
-    overflow-y: scroll;
+    overflow-y: scroll hidden;
+
 }
 
 .journal__entry{
@@ -50,12 +50,16 @@
     border-radius: 15px;
     color: darken($color: white, $amount: 20);
     display: flex;
+    justify-content: space-between;
     margin-bottom: 10px;
 }
 
 .journal__entry-picture{
+    border-radius: 100%;
     background-size: cover;
     height: 75px;
+    margin-top: 10px;
+    margin-left: 5px;
     width: 75px;
 }
 

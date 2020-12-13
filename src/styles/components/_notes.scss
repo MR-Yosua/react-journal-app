@@ -4,6 +4,7 @@
     height: 100%;
     background-color: darken($color: $blue-cover, $amount: 40);
     
+    
 }
 
 .notes__appbar{
@@ -13,7 +14,7 @@
     background-color: darken($color: $blue-cover, $amount: 30);
     color: white;
     display: flex;
-    width: 88%;
+    width:76vw;
     justify-content: space-between;
     padding: 10px 20px 10px 20px;
 }
@@ -30,7 +31,7 @@
     background-color: darken($color: $blue-cover, $amount: 30);
     color: white;
     border:none;
-    
+    width:76vw;
     &:focus{
         outline: none;
     }

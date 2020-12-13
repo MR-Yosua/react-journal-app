@@ -1,33 +1,56 @@
-import React from 'react'
+import React from 'react';
+import moment from 'moment';
+import { useDispatch } from 'react-redux';
+import { activeNote } from '../../actions/notes';
+import 'moment/locale/es';
 
-export const JournalEntry = () => {
+
+export const JournalEntry = ({id,date,title,body,url}) => {
+
+    
+    const dispatch = useDispatch();
+
+    const noteDate = moment(date);
+
+    const handleEntryClick = () => {
+        dispatch(activeNote(id,{
+            date,title,body,url
+        }));
+    }
+
     return (
-        <div className="journal__entry">
+        <div 
+        className="journal__entry animate__animated animate__fadeIn animate__faster"
+        onClick={handleEntryClick}
+        >
             
-            <div 
-            className="journal__entry-picture"
-            style={{
-                backgroundSize: 'cover',
-                backgroundImage: 'url(https://www.crecemujer.cl/sites/default/files/styles/medium/public/como_hacer_para_marcar_la_diferencia_con_tu_competencia_13.jpg?itok=lEW11gYS)'
-            }}
-            >
-            </div>
+            {
+                url &&
+                <div 
+                className="journal__entry-picture"
+                style={{
+                    backgroundSize: 'cover',
+                    backgroundImage: `url(${url})`
+                }}
+                >
+                </div>
+            }
 
             <div className ="journal__entry-body">
 
                 <p className ="journal__entry-title">
-                    Dia pelito
+                    { title}
                 </p>
 
                 <p className ="journal__entry-content">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                     {body}
                 </p>
 
             </div>
 
             <div className ="journal__entry-date-box">
-                <span>Monday</span>
-                <h4>28</h4>
+        <span>{noteDate.format('MMMM')}</span>
+                <h4>{noteDate.format('e')}</h4>
             </div>
 
         </div>
